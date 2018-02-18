@@ -77,6 +77,7 @@ static char STIPPLE_DATA[] = { 0x02, 0x01 };
 static int CantManageScreen = 0;
 
 static WMPropList *dApplications = NULL;
+static WMPropList *dHead;
 static WMPropList *dWorkspace;
 static WMPropList *dDock;
 static WMPropList *dClip;
@@ -88,6 +89,7 @@ static void make_keys(void)
 		return;
 
 	dApplications = WMCreatePLString("Applications");
+	dHead = WMCreatePLString("Head");
 	dWorkspace = WMCreatePLString("Workspace");
 	dDock = WMCreatePLString("Dock");
 	dClip = WMCreatePLString("Clip");
@@ -610,6 +612,7 @@ WScreen *wScreenInit(int screen_number)
 	scr->depth = DefaultDepth(dpy, screen_number);
 	scr->colormap = DefaultColormap(dpy, screen_number);
 
+	scr->focused_head = 0;
 	scr->scr_width = WidthOfScreen(ScreenOfDisplay(dpy, screen_number));
 	scr->scr_height = HeightOfScreen(ScreenOfDisplay(dpy, screen_number));
 

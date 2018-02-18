@@ -89,6 +89,8 @@ typedef struct _WScreen {
     Window no_focus_win;	       /* window to get focus when nobody
                                         * else can do it */
 
+    int focused_head;                  /* currently focused head */
+
     struct WWindow *focused_window;    /* window that has the focus
                                         * Use this list if you want to
                                         * traverse the entire window list

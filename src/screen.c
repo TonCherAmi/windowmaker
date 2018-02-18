@@ -984,6 +984,10 @@ void wScreenSaveState(WScreen * scr)
 		if (foo != NULL)
 			WMPutInPLDictionary(scr->session_state, dApplications, foo);
 
+		foo = WMGetFromPLDictionary(old_state, dHead);
+		if (foo != NULL)
+			WMPutInPLDictionary(scr->session_state, dHead, foo);
+
 		foo = WMGetFromPLDictionary(old_state, dWorkspace);
 		if (foo != NULL)
 			WMPutInPLDictionary(scr->session_state, dWorkspace, foo);

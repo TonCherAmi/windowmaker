@@ -695,6 +695,8 @@ void StartUp(Bool defaultScreenOnly)
 			}
 		}
 
+		wSessionRestoreLastHead(wScreen[j]);
+
 		/* go to workspace where we were before restart */
 		if (lastDesktop >= 0)
 			wWorkspaceForceChange(wScreen[j], lastDesktop);

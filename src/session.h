@@ -25,5 +25,6 @@
 void wSessionSaveState(WScreen *scr);
 void wSessionClearState(WScreen *scr);
 void wSessionRestoreState(WScreen *scr);
+void wSessionRestoreLastHead(WScreen *scr);
 void wSessionRestoreLastWorkspace(WScreen *scr);
 #endif

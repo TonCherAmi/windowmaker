@@ -90,6 +90,7 @@ static WMPropList *sApplications = NULL;
 static WMPropList *sCommand;
 static WMPropList *sName;
 static WMPropList *sHost;
+static WMPropList *sHead;
 static WMPropList *sWorkspace;
 static WMPropList *sShaded;
 static WMPropList *sMiniaturized;
@@ -109,6 +110,7 @@ static void make_keys(void)
 	sCommand = WMCreatePLString("Command");
 	sName = WMCreatePLString("Name");
 	sHost = WMCreatePLString("Host");
+	sHead = WMCreatePLString("Head");
 	sWorkspace = WMCreatePLString("Workspace");
 	sShaded = WMCreatePLString("Shaded");
 	sMiniaturized = WMCreatePLString("Miniaturized");
@@ -274,7 +276,7 @@ static WMPropList *makeWindowState(WWindow * wwin, WApplication * wapp)
 void wSessionSaveState(WScreen * scr)
 {
 	WWindow *wwin = scr->focused_window;
-	WMPropList *win_info, *wks;
+	WMPropList *win_info, *hs, *wks;
 	WMPropList *list = NULL;
 	WMArray *wapp_list = NULL;
 
@@ -317,6 +319,12 @@ void wSessionSaveState(WScreen * scr)
 	WMPutInPLDictionary(scr->session_state, sApplications, list);
 	WMReleasePropList(list);
 
+	char buf[16];
+	snprintf(buf, sizeof(buf), "%i", scr->focused_head);
+	hs = WMCreatePLString(buf);
+	WMPutInPLDictionary(scr->session_state, sHead, hs);
+	WMReleasePropList(hs);
+
 	wks = WMCreatePLString(scr->workspaces[scr->current_workspace]->name);
 	WMPutInPLDictionary(scr->session_state, sWorkspace, wks);
 	WMReleasePropList(wks);
@@ -332,6 +340,7 @@ void wSessionClearState(WScreen * scr)
 		return;
 
 	WMRemoveFromPLDictionary(scr->session_state, sApplications);
+	WMRemoveFromPLDictionary(scr->session_state, sHead);
 	WMRemoveFromPLDictionary(scr->session_state, sWorkspace);
 }
 
@@ -550,6 +559,28 @@ void wSessionRestoreState(WScreen *scr)
 	}
 	/* clean up */
 	WMPLSetCaseSensitive(False);
+}
+
+void wSessionRestoreLastHead(WScreen * scr)
+{
+	WMPropList *hs;
+	char *value;
+
+	make_keys();
+
+	if (!scr->session_state)
+		return;
+
+	hs = WMGetFromPLDictionary(scr->session_state, sHead);
+	if (!hs || !WMIsPLString(hs))
+		return;
+
+	value = WMGetFromPLString(hs);
+
+	if (!value)
+		return;
+
+	scr->focused_head = atoi(value);
 }
 
 void wSessionRestoreLastWorkspace(WScreen * scr)

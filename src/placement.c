@@ -512,8 +512,7 @@ void PlaceWindow(WWindow *wwin, int *x_ret, int *y_ret, unsigned width, unsigned
 	if (h < wPreferences.window_title_min_height)
 		h = wPreferences.window_title_min_height;
 
-	WArea usableArea = wGetUsableAreaForHead(scr, wGetHeadForPointerLocation(scr),
-						 NULL, True);
+	WArea usableArea = wGetUsableAreaForHead(scr, scr->focused_head, NULL, True);
 
 	switch (wPreferences.window_placement) {
 	case WPM_MANUAL:

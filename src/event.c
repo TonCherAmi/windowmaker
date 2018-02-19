@@ -757,6 +757,8 @@ static void executeButtonAction(WScreen *scr, XEvent *event, int action)
 
 	switch (action) {
 	case WA_SELECT_WINDOWS:
+		scr->focused_head = wGetHeadForPoint(scr, wmkpoint(event->xbutton.x_root,
+								   event->xbutton.y_root));
 		wUnselectWindows(scr);
 		wSelectWindows(scr, event);
 		break;

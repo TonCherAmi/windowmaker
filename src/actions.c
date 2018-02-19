@@ -210,6 +210,7 @@ void wSetFocusTo(WScreen *scr, WWindow *wwin)
 		focused->next = wwin;
 		wwin->next = NULL;
 		scr->focused_window = wwin;
+		scr->focused_head = wGetHeadForWindow(wwin);
 
 		if (oapp && oapp != napp) {
 			wAppMenuUnmap(oapp->menu);

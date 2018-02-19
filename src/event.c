@@ -1433,14 +1433,14 @@ static void handleKeyPress(XEvent * event)
 	case WKBD_ROOTMENU:
 		/*OpenRootMenu(scr, event->xkey.x_root, event->xkey.y_root, True); */
 		if (!CheckFullScreenWindowFocused(scr)) {
-			WMRect rect = wGetRectForHead(scr, wGetHeadForPointerLocation(scr));
+			WMRect rect = wGetRectForHead(scr, scr->focused_head);
 			OpenRootMenu(scr, rect.pos.x + rect.size.width / 2, rect.pos.y + rect.size.height / 2,
 				     True);
 		}
 		break;
 	case WKBD_WINDOWLIST:
 		if (!CheckFullScreenWindowFocused(scr)) {
-			WMRect rect = wGetRectForHead(scr, wGetHeadForPointerLocation(scr));
+			WMRect rect = wGetRectForHead(scr, scr->focused_head);
 			OpenSwitchMenu(scr, rect.pos.x + rect.size.width / 2, rect.pos.y + rect.size.height / 2,
 				       True);
 		}

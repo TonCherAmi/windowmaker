@@ -78,7 +78,7 @@ static int canReceiveFocus(WWindow *wwin)
 		return 0;
 
 	if (wPreferences.cycle_active_head_only &&
-	    wGetHeadForWindow(wwin) != wGetHeadForPointerLocation(wwin->screen_ptr))
+	    wGetHeadForWindow(wwin) != wwin->screen_ptr->focused_head)
 		return 0;
 
 	if (WFLAGP(wwin, no_focusable))

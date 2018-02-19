@@ -2412,24 +2412,10 @@ static int restoreMenu(WScreen *scr, WMPropList *menu)
 	pmenu = scr->switch_menu;
 
 	if (pmenu) {
-		int width = MENUW(pmenu);
-		int height = MENUH(pmenu);
-		WMRect rect = wGetRectForHead(scr, wGetHeadForPointerLocation(scr));
-
 		if (lowered) {
 			changeMenuLevels(pmenu, True);
 		}
 
-		if (x < rect.pos.x - width)
-			x = rect.pos.x;
-		if (x > rect.pos.x + rect.size.width)
-			x = rect.pos.x + rect.size.width - width;
-		if (y < rect.pos.y)
-			y = rect.pos.y;
-		if (y > rect.pos.y + rect.size.height)
-			y = rect.pos.y + rect.size.height - height;
-
-		wMenuMove(pmenu, x, y, True);
 		pmenu->flags.buttoned = 1;
 		wFrameWindowShowButton(pmenu->frame, WFF_RIGHT_BUTTON);
 		return True;
@@ -2453,12 +2439,7 @@ static int restoreMenuRecurs(WScreen *scr, WMPropList *menus, WMenu *menu, const
 	res = False;
 
 	if (entry && getMenuInfo(entry, &x, &y, &lowered)) {
-
 		if (!menu->flags.mapped) {
-			int width = MENUW(menu);
-			int height = MENUH(menu);
-			WMRect rect = wGetRectForHead(scr, wGetHeadForPointerLocation(scr));
-
 			wMenuMapAt(menu, x, y, False);
 
 			if (menu->parent) {
@@ -2474,16 +2455,6 @@ static int restoreMenuRecurs(WScreen *scr, WMPropList *menus, WMenu *menu, const
 				changeMenuLevels(menu, True);
 			}
 
-			if (x < rect.pos.x - width)
-				x = rect.pos.x;
-			if (x > rect.pos.x + rect.size.width)
-				x = rect.pos.x + rect.size.width - width;
-			if (y < rect.pos.y)
-				y = rect.pos.y;
-			if (y > rect.pos.y + rect.size.height)
-				y = rect.pos.y + rect.size.height - height;
-
-			wMenuMove(menu, x, y, True);
 			menu->flags.buttoned = 1;
 			wFrameWindowShowButton(menu->frame, WFF_RIGHT_BUTTON);
 			res = True;

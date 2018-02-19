@@ -794,9 +794,11 @@ static void move_menus(WMenu * menu, int x, int y)
 
 static void makeVisible(WMenu * menu)
 {
+	(void) menu;
+	/*
 	WScreen *scr = menu->frame->screen_ptr;
 	int x1, y1, x2, y2, new_x, new_y;
-	WMRect rect = wGetRectForHead(scr, wGetHeadForPointerLocation(scr));
+	WMRect rect = wGetRectForHead(scr, scr->focused_head);
 
 	if (menu->entry_no < 0)
 		return;
@@ -823,6 +825,7 @@ static void makeVisible(WMenu * menu)
 
 	new_y = new_y - menu->frame->top_width - menu->selected_entry * menu->entry_height;
 	move_menus(menu, new_x, new_y);
+	*/
 }
 
 static int check_key(WMenu * menu, XKeyEvent * event)

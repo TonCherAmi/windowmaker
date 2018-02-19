@@ -864,8 +864,7 @@ static int keyboardMenu(WMenu * menu)
 	int old_pos_x = menu->frame_x;
 	int old_pos_y = menu->frame_y;
 	int new_x = old_pos_x, new_y = old_pos_y;
-	WMRect rect = wGetRectForHead(menu->frame->screen_ptr,
-				      wGetHeadForPointerLocation(menu->frame->screen_ptr));
+	WMRect rect = wGetRectForHead(menu->frame->screen_ptr, menu->frame->screen_ptr->focused_head);
 
 	if (menu->flags.editing)
 		return False;

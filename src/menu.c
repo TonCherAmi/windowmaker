@@ -1061,7 +1061,7 @@ void wMenuMapAt(WMenu * menu, int x, int y, int keyboard)
 	}
 
 	if (!menu->flags.mapped) {
-		if (wPreferences.wrap_menus) {
+		if (wPreferences.wrap_menus && !keyboard) {
 			WScreen *scr = menu->frame->screen_ptr;
 			WMRect rect = wGetRectForHead(scr, wGetHeadForPointerLocation(scr));
 

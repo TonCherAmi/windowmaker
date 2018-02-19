@@ -135,6 +135,9 @@ enum {
 	/* launch a new instance of the active window */
 	WKBD_RELAUNCH,
 
+	/* head  */
+	WKBD_SWITCH_HEAD,
+
 	/* screen */
 	WKBD_SWITCH_SCREEN,
 

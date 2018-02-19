@@ -1810,6 +1810,18 @@ static void handleKeyPress(XEvent * event)
 
 		break;
 
+	case WKBD_SWITCH_HEAD:
+		if (wXineramaHeads(scr) < 2)
+			break;
+		else if (scr->focused_head < wXineramaHeads(scr) - 1)
+			scr->focused_head++;
+		else
+			scr->focused_head = 0;
+
+		StartWindozeCycle(wwin, event, True, False);
+
+		break;
+
 	case WKBD_SWITCH_SCREEN:
 		if (w_global.screen_count > 1) {
 			WScreen *scr2;

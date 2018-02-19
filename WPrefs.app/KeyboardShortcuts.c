@@ -150,6 +150,7 @@ static const struct {
 
 	/* Misc. */
 	{ "WindowRelaunchKey", N_("Launch new instance of application") },
+	{ "HeadSwitchKey",     N_("Switch to Next Head") },
 	{ "ScreenSwitchKey",   N_("Switch to Next Screen/Monitor") },
 	{ "RunKey",            N_("Run application") },
 	{ "DockRaiseLowerKey", N_("Raise/Lower Dock") },

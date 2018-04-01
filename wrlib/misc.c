@@ -59,7 +59,7 @@ void RBevelImage(RImage * image, int bevel_type)
 		color.red = color.green = color.blue = 0;
 		cdelta.red = cdelta.green = cdelta.blue = 40;
 		if (bevel_type == RBEV_RAISED2 || bevel_type == RBEV_RAISED3) {
-			ROperateLine(image, RSubtractOperation, 0, h - 2, w - 3, h - 2, &cdelta);
+			ROperateLine(image, RSubtractOperation, 0, h - 1, w - 3, h - 1, &cdelta);
 			/*RDrawLine(image, 0, h - 1, w - 1, h - 1, &color);*/
 		} else {
 			ROperateLine(image, RSubtractOperation, 0, h - 1, w - 1, h - 1, &cdelta);
@@ -67,8 +67,8 @@ void RBevelImage(RImage * image, int bevel_type)
 
 		/* right */
 		if (bevel_type == RBEV_RAISED2 || bevel_type == RBEV_RAISED3) {
-			ROperateLine(image, RSubtractOperation, w - 2, 0, w - 2, h - 2, &cdelta);
-			RDrawLine(image, w - 1, 0, w - 1, h - 2, &color);
+			ROperateLine(image, RSubtractOperation, w - 1, 0, w - 1, h - 1, &cdelta);
+			/*RDrawLine(image, w - 1, 0, w - 1, h - 2, &color);*/
 		} else {
 			ROperateLine(image, RSubtractOperation, w - 1, 0, w - 1, h - 2, &cdelta);
 		}
